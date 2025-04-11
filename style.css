@@ -11,6 +11,7 @@ html{
     scroll-behavior: smooth;
 }
 
+
 /* custom scroll bar */
 ::-webkit-scrollbar {
     width: 10px;
@@ -762,4 +763,12 @@ footer span a:hover{
         font-size: 23px;
         line-height: 38px;
     }
+}
+/* Social Media Links Styling */
+.social-media a {
+    color: red; /* Set icon color to red */
+    text-decoration: none; /* Remove underline from links */
+}
+.social-media a:hover {
+    color: darkred; /* Change color on hover (optional) */
 }
