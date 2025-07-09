@@ -73,17 +73,27 @@ $(document).ready(function(){
 
     // typing text animation script
     var typed = new Typed(".typing", {
-        strings: ["Student", " Web Developer", "Gamer(CODM)", "Data Analyser", "Explorer", "debuger"],
-        typeSpeed: 105,
-        backSpeed: 90,
-        loop: true
+        strings: ["Student", " cyber forensics leaner", "Explorer", "debugger"],
+        typeSpeed: 150,
+        backSpeed: 100,
+        backDelay: 1000,
+        loop: true,
+        smartBackspace: true,
+        showCursor: true, 
+        cursorChar: '/',
+        autoInsertCss: true
     });
 
     var typed2 = new Typed(".typing-2", {
-        strings: ["Student", " Web Developer", "Gamer(CODM)", "Data Analyser", "Explorer","debuger"],
-        typeSpeed: 105,
-        backSpeed: 90,
-        loop: true
+        strings: ["Student", " cyber forensics leaner", "Explorer", "debugger"],
+        typeSpeed: 150,
+        backSpeed: 100,
+        backDelay: 1000,
+        loop: true,
+        smartBackspace: true,
+        showCursor: true,
+        cursorChar: '/',
+        autoInsertCss: true
     });
 
     // owl carousel script
@@ -107,6 +117,61 @@ $(document).ready(function(){
                 nav: false
             }
         }
+    });
+
+    // Interactive Skills Section
+    $('.primary-skill').on('click keypress', function(e) {
+        if(e.type === 'click' || e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const $subSkills = $(this).find('.sub-skills');
+            if($subSkills.hasClass('show')) {
+                $subSkills.removeClass('show');
+                $(this).attr('aria-expanded', 'false');
+            } else {
+                // Close other open sub-skills
+                $('.sub-skills.show').removeClass('show');
+                $('.primary-skill').attr('aria-expanded', 'false');
+                // Open this one
+                $subSkills.addClass('show');
+                $(this).attr('aria-expanded', 'true');
+            }
+        }
+    });
+
+    // Reveal sub-skills on hover (mouseenter) and hide on mouseleave
+    $('.primary-skill').on('mouseenter', function() {
+        // Close other open sub-skills
+        $('.sub-skills.show').removeClass('show');
+        $('.primary-skill').attr('aria-expanded', 'false');
+
+        const $subSkills = $(this).find('.sub-skills');
+        $subSkills.addClass('show');
+        $(this).attr('aria-expanded', 'true');
+    });
+
+    $('.primary-skill').on('mouseleave', function() {
+        const $subSkills = $(this).find('.sub-skills');
+        $subSkills.removeClass('show');
+        $(this).attr('aria-expanded', 'false');
+    });
+
+    // Add subtle 3D hover effect using CSS transform on mousemove
+    $('.primary-skill').on('mousemove', function(e) {
+        const $this = $(this);
+        const offset = $this.offset();
+        const width = $this.outerWidth();
+        const height = $this.outerHeight();
+        const centerX = offset.left + width / 2;
+        const centerY = offset.top + height / 2;
+        const mouseX = e.pageX;
+        const mouseY = e.pageY;
+        const rotateX = ((mouseY - centerY) / height) * 10; // max 10 deg rotation
+        const rotateY = ((mouseX - centerX) / width) * -10;
+        $this.css('transform', `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`);
+    });
+
+    $('.primary-skill').on('mouseleave', function() {
+        $(this).css('transform', 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)');
     });
 });
 
@@ -147,20 +212,6 @@ $(document).ready(function(){
         $('.menu-btn i').toggleClass("active");
     });
 
-    // typing text animation script
-    var typed = new Typed(".typing", {
-        strings: ["Student", " Web Developer", "Gamer(CODM)", "Data Analyser", "Explorer", "debuger"],
-        typeSpeed: 105,
-        backSpeed: 90,
-        loop: true
-    });
-
-    var typed = new Typed(".typing-2", {
-        strings: ["Student", " Web Developer", "Gamer(CODM)", "Data Analyser", "Explorer","debuger"],
-        typeSpeed: 105,
-        backSpeed: 90,
-        loop: true
-    });
 
     // owl carousel script
     $('.carousel').owlCarousel({
@@ -185,4 +236,3 @@ $(document).ready(function(){
         }
     });
 });
-
