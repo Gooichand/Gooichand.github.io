@@ -165,14 +165,30 @@ section .title::after{
 
 /* home section styling */
 .home{
+    position: relative;
     display: flex;
-    background: url("images/banner.jpg") no-repeat center;
     height: 100vh;
     color: #fff;
     min-height: 700px;
-    background-size: cover;
-    background-attachment: fixed;
     font-family: 'Ubuntu', sans-serif;
+}
+.home video {
+    position: absolute;
+    quality: extra-high;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    image-rendering: pixelated;
+    z-index: -2;
+}
+.home .video-overlay {
+    display: none;
+}
+@keyframes smokeMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 1000px 0; }
 }
 .home .max-width{
   width: 100%;
@@ -263,37 +279,144 @@ section .title::after{
     background: #111;
     content: "my-education";
   }
-  .education .serv-content .card {
-    width: calc(33% - 20px);
-    background-color: white;
-    text-align: center;
+/* Remove old card styles for education section */
+.education .serv-content {
+    display: none;
+}
+
+/* Timeline container */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* The vertical timeline line */
+.timeline::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: crimson;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.timeline-item {
+    position: relative;
+    margin: 20px 0;
+    padding: 20px 40px;
+    width: 50%;
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: rgba(220, 20, 60, 0.3); /* Slightly red glass color */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 6px;
-    padding: 20px 3px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .education .serv-content .card:hover {
-    background: crimson;
-  }
-  .education .serv-content .card .box {
-    transition: all 0.3s ease;
-  }
-  .education .serv-content .card:hover .box {
-    transform: scale(1.05);
-  }
-  .education .serv-content .card i {
-    font-size: 50px;
-    color: crimson;
-    transition: color 0.3s ease;
-  }
-  .education .serv-content .card:hover i {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     color: #fff;
-  }
-  .education .serv-content .card .text {
-    font-size: 25px;
-    font-weight: 500;
-    margin: 10px 0 7px 0;
-  }
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.timeline-item:hover {
+    transform: scale(1.05) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 10px 20px rgba(220, 20, 60, 0.6);
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timeline-content {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+/* Timeline item */
+.timeline-item {
+    position: relative;
+    margin-left: 70px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center; /* Vertically center icon and content */
+}
+
+.timeline-item::before {
+    content: none;
+}
+
+.timeline-icon {
+    display: none; /* Hide the timeline icon container for all items */
+}
+
+/* Timeline icon */
+.timeline-icon {
+    position: absolute;
+    left: 22px; /* Adjusted from 0 to 22px to better align with timeline line */
+    top: 0;
+    background-color: crimson;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 24px;
+    box-shadow: 0 0 8px rgba(220, 20, 60, 0.7);
+}
+
+/* Timeline content */
+.timeline-content {
+    background-color: rgba(220, 20, 60, 0.3); /* Slightly red glass color */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    color: #fff; /* Ensure text is readable on glass background */
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    color: crimson;
+}
+
+.timeline-content p {
+    margin: 8px 0 0 0;
+    color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .timeline {
+        max-width: 100%;
+        padding-left: 20px;
+    }
+    .timeline::after {
+        left: 20px;
+    }
+    .timeline-item {
+        margin-left: 60px;
+        margin-bottom: 30px;
+    }
+    .timeline-icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+    }
+}
 
 /* experiences section styling */
 .services, .teams{
@@ -393,7 +516,7 @@ section .title::after{
     background: lightgrey;
     position: relative;
 }
-.skills .skills-content .right .line::before{
+.skills-content .right .line::before{
     content: "";
     position: absolute;
     height: 100%;
@@ -402,22 +525,22 @@ section .title::after{
     background: crimson;
 }
 .skills-content .right .html::before{
-    width: 90%;
+    width: 80%;
 }
 .skills-content .right .css::before{
-    width: 60%;
+    width: 65%;
 }
 .skills-content .right .js::before{
-    width: 80%;
+    width: 60%;
 }
 .skills-content .right .php::before{
     width: 50%;
 }
 .skills-content .right .Cpp::before{
-    width: 80%;
+    width: 50%;
 }
 .skills-content .right .C::before{
-    width: 80%;
+    width: 70%;
 }
 .skills-content .right .Java::before{
     width: 60%;
@@ -427,6 +550,124 @@ section .title::after{
 }
 .skills-content .right .Github::before{
     width: 70%;
+}
+.skills-content .right .cybersecurity::before{
+    width: 55%;
+}
+.skills-content .right .cyberforensics::before{
+    width: 40%;
+}
+
+/* New styles for interactive Skills section */
+
+.skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.primary-skill {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px 20px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #000; /* changed from white to black */
+    outline: none;
+    box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+}
+
+.primary-skill:hover,
+.primary-skill:focus {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 30px rgba(220, 20, 60, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.primary-skill h3 {
+    margin: 0;
+    font-size: 22px;
+    user-select: none;
+}
+
+.sub-skills {
+    margin-top: 12px;
+    display: none;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    background: rgba(220, 20, 60, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: crimson; /* changed from white to red */
+    font-size: 16px;
+    user-select: none;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.sub-skills.show {
+    display: flex;
+    opacity: 1;
+    max-height: 500px; /* enough to show all sub-skills */
+    transform: translateY(0);
+    transition: opacity 0.4s ease, max-height 0.4s ease, transform 0.4s ease;
+}
+
+.sub-skills {
+    margin-top: 12px;
+    display: none;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    background: rgba(220, 20, 60, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: crimson; /* changed from white to red */
+    font-size: 16px;
+    user-select: none;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: opacity 0.4s ease, max-height 0.4s ease, transform 0.4s ease;
+    max-height: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+}
+
+.sub-skills span {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(220, 20, 60, 0.4);
+    transition: background-color 0.3s ease;
+}
+
+.sub-skills span:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .skills .skills-content .left,
+    .skills .skills-content .right {
+        width: 100%;
+    }
+    .skill-list {
+        gap: 15px;
+    }
+    .primary-skill h3 {
+        font-size: 20px;
+    }
+    .sub-skills {
+        font-size: 14px;
+    }
 }
 .skills-content .right .Git::before{
     width: 60%;
@@ -501,6 +742,35 @@ content: "Scholars";
     background: crimson!important;
 }
 
+/* media gallery section styling */
+.media-gallery {
+    color: #fff;
+    background: #111;
+    padding: 100px 0;
+}
+.media-gallery .title::after {
+    content: "My Memories";
+    color: crimson;
+}
+.media-gallery .carousel .item {
+    position: relative;
+    padding: 10px;
+}
+.media-gallery .carousel .item img,
+.media-gallery .carousel .item video {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 3px solid crimson;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+.media-gallery .carousel .item img:hover,
+.media-gallery .carousel .item video:hover {
+    transform: scale(1.05);
+    border-color: #fff;
+}
 /* contact section styling */
 .contact .title::after{
     content: "get in touch";
@@ -530,6 +800,9 @@ content: "Scholars";
 .contact .contact-content .row i{
     font-size: 25px;
     color: crimson;
+}
+.social-media ul li a i {
+    color: red !important;
 }
 .contact .contact-content .info .head{
     font-weight: 500;
@@ -611,6 +884,54 @@ footer span a:hover{
     text-decoration: underline;
 }
 
+/* badges section styling */
+.badges {
+    background: #111;
+    color: #fff;
+    padding: 60px 0;
+}
+.badges .title::after {
+    content: "My Achievements";
+}
+.badges-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: crimson #222;
+}
+.badges-container::-webkit-scrollbar {
+    height: 8px;
+}
+.badges-container::-webkit-scrollbar-track {
+    background: #222;
+}
+.badges-container::-webkit-scrollbar-thumb {
+    background: crimson;
+    border-radius: 10px;
+}
+.badge-img {
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    margin-right: 15px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid crimson;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+.badge-img:hover {
+    transform: scale(1.1);
+    border-color: #fff;
+}
+
+
+
+
+
 
 /* responsive media query start */
 @media  only screen and (max-width: 600px) {
@@ -623,6 +944,18 @@ footer span a:hover{
         height: 350px;
         width: 350px;
     }
+}
+/* mark styling */
+mark {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 0 10px;
+    color: rgb(10, 10, 10);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 0;
 }
 
 @media only screen and (max-width: 600px) {
