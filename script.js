@@ -172,24 +172,7 @@ $(document).ready(function(){
         $(this).attr('aria-expanded', 'false');
     });
 
-    // Add subtle 3D hover effect using CSS transform on mousemove
-    $('.primary-skill').on('mousemove', function(e) {
-        const $this = $(this);
-        const offset = $this.offset();
-        const width = $this.outerWidth();
-        const height = $this.outerHeight();
-        const centerX = offset.left + width / 2;
-        const centerY = offset.top + height / 2;
-        const mouseX = e.pageX;
-        const mouseY = e.pageY;
-        const rotateX = ((mouseY - centerY) / height) * 10; // max 10 deg rotation
-        const rotateY = ((mouseX - centerX) / width) * -10;
-        $this.css('transform', `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`);
-    });
 
-    $('.primary-skill').on('mouseleave', function() {
-        $(this).css('transform', 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)');
-    });
 
     // Enhanced Contact Form Functionality
     $('#contactForm').on('submit', function(e) {
@@ -259,4 +242,36 @@ $(document).ready(function(){
             });
         }
     });
+});
+
+// Image Modal Functions
+function openImageModal(src, alt) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const caption = document.getElementById('caption');
+    
+    modal.style.display = 'block';
+    modalImg.src = src;
+    caption.innerHTML = alt;
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside the image
+document.getElementById('imageModal').onclick = function(event) {
+    if (event.target === this) {
+        closeImageModal();
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeImageModal();
+    }
 });

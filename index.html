@@ -87,27 +87,59 @@
         <div class="max-width">
             <h2 class="title">Educational Qualifications</h2>
             <div class="timeline">
-                <div class="timeline-item">
+                <div class="timeline-start">
+                    <i class="fas fa-book"></i>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-dot">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
                     <div class="timeline-content">
-                        <h3><a href="https://www.sandipuniversity.edu.in/" target="_blank">Sandip University</a></h3>
-                        <p><strong>Student</strong> Sandip university, Nashik<br>
-                        Stream: B-tech in CSE with Specialisation in Cybersecurity and Forensic (CSF)<br>
-                        Studying</p>
+                        <div class="timeline-arrow"></div>
+                        <div class="education-image">
+                            <img src="images/school.jpeg" alt="Class X" onclick="openImageModal(this.src, this.alt)">
+                        </div>
+                        <div class="education-info">
+                            <h3><a href="https://slhschool.in/" target="_blank">Class X</a></h3>
+                            <p>Sri Lakshmi School, SVR Colony Kurnool<br>
+                            Passing Year: 2021</p>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
+                
+                <div class="timeline-item right">
+                    <div class="timeline-dot">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
                     <div class="timeline-content">
-                        <h3><a href="https://g.co/kgs/E3QEvof" target="_blank">Class XII</a></h3>
-                        <p>St Joseph's jr college, Sunkesula Rd, Kurnool<br>
-                        Stream: Maths<br>
-                        Passing Year: 2023</p>
+                        <div class="timeline-arrow"></div>
+                        <div class="education-image">
+                            <img src="images/stjopfor edus.png" alt="Class XII" onclick="openImageModal(this.src, this.alt)">
+                        </div>
+                        <div class="education-info">
+                            <h3><a href="https://g.co/kgs/E3QEvof" target="_blank">Class XII</a></h3>
+                            <p>St Joseph's Jr College, Sunkesula Rd, Kurnool<br>
+                            Stream: Mathematics<br>
+                            Passing Year: 2023</p>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
+                
+                <div class="timeline-item left">
+                    <div class="timeline-dot">
+                        <i class="fas fa-university"></i>
+                    </div>
                     <div class="timeline-content">
-                        <h3><a href="https://slhschool.in/" target="_blank">Class X</a></h3>
-                        <p>Sri lakshmi school, SVR colony Kurnool<br>
-                        Passing Year: 2021</p>
+                        <div class="timeline-arrow"></div>
+                        <div class="education-image">
+                            <img src="images/sandipforeduse.png" alt="Sandip University" onclick="openImageModal(this.src, this.alt)">
+                        </div>
+                        <div class="education-info">
+                            <h3><a href="https://www.sandipuniversity.edu.in/" target="_blank">Sandip University</a></h3>
+                            <p><strong>Studying</strong> Sandip university, Nashik<br>
+                            Stream: B-tech in CSE with Specialisation in Cybersecurity and Forensic (CSF)<br>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,7 +162,7 @@
                     <div class="box">
                         <i class="fas fa-chart-line"></i>
                         <div class="text">Data Analysis</div>
-                        <p><h6>Virtual Internship</h6>
+                        <p><strong>Virtual Internship</strong><br>
                         During my data analysis internship at IIT Guwahati, I leveraged Kaggle tools to analyze datasets and derive actionable insights using Python and statistical modeling techniques.</p>
                     </div>
                 </div> 
@@ -159,8 +191,8 @@
                     <div class="box">
                         <i class="fas fa-paint-brush"></i>
                         <div class="text">Cloud Counselage Pvt. Ltd.</div>
-                        <p>Live – Project in cybersecurity (Intership)
-                            Intern id- IP4912,Completed a flexible 6-week to 3-month internship on live cybersecurity projects, gaining industry exposure and receiving a certificate upon successful completion.</p>
+                        <p><strong>Live Project in Cybersecurity (Internship)</strong><br>
+                        Intern ID: IP4912. Completed a flexible 6-week to 3-month internship on live cybersecurity projects, gaining industry exposure and receiving a certificate upon successful completion.</p>
                     </div>
                 </div>
             </div>
@@ -556,30 +588,16 @@
         </div>
     </section>
 
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption"></div>
+    </div>
+
     <!-- footer section start -->
     <footer>
         <span>Created By <a>DGC</a> | <span class="far fa-copyright"></span> 2025 All rights reserved.</span>
-        <!-- Social Media Links Section -->
-        <div class="social-media">
-            <h1>Follow me on</h1>
-            <ul style="list-style-type: none; padding: 0;">
-                <li style="display: inline; margin-right: 10px;">
-                    <a href="https://github.com/Gooichand" target="_blank" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </li>
-                <li style="display: inline; margin-right: 10px;">
-                    <a href="https://discord.com/users/gopichand5568" target="_blank" title="Discord">
-                        <i class="fab fa-discord"></i>
-                    </a>
-                </li>
-                <li style="display: inline; margin-right: 10px;">
-                    <a href="https://wa.me/+919390606393" target="_blank" title="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
     </footer>
     <script src="script.js"></script>
 </body>
