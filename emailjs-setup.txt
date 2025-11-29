@@ -1,0 +1,26 @@
+EMAILJS SETUP INSTRUCTIONS:
+
+1. Replace these values in script.js:
+
+const EMAILJS_CONFIG = {
+  publicKey: 'YOUR_PUBLIC_KEY',        // Replace with your EmailJS public key
+  serviceId: 'YOUR_SERVICE_ID',        // Replace with your service ID  
+  contactTemplateId: 'YOUR_CONTACT_TEMPLATE_ID',   // Replace with contact template ID
+  visitorTemplateId: 'YOUR_VISITOR_TEMPLATE_ID'    // Replace with visitor template ID
+};
+
+2. Find these values in your EmailJS dashboard:
+   - Public Key: Integration tab
+   - Service ID: Email Services tab
+   - Template IDs: Email Templates tab
+
+3. Template Variables to use:
+   Contact Template: {{name}}, {{email}}, {{subject}}, {{message}}
+   Visitor Template: {{name}}, {{timestamp}}
+
+4. Test your setup by filling forms on your website!
+
+FREE LIMITS:
+- 200 emails/month
+- No server needed
+- Works from any hosting (GitHub Pages, Netlify, etc.)
