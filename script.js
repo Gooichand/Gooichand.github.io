@@ -273,5 +273,47 @@ document.getElementById('imageModal').onclick = function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeImageModal();
+        closeNewsPopup();
     }
 });
+
+// Modern News Card Functions
+function toggleNewsPopup() {
+    const card = document.getElementById('newsCard');
+    card.classList.toggle('show');
+}
+
+function closeNewsPopup() {
+    const card = document.getElementById('newsCard');
+    card.classList.remove('show');
+}
+
+// Auto show news card when home section is visible
+function showNewsOnHome() {
+    const card = document.getElementById('newsCard');
+    if (card) {
+        setTimeout(() => {
+            card.classList.add('show');
+        }, 2000);
+    }
+}
+
+// Check if home section is in view
+$(window).scroll(function() {
+    const homeSection = $('#home');
+    const homeTop = homeSection.offset().top;
+    const homeBottom = homeTop + homeSection.outerHeight();
+    const scrollTop = $(window).scrollTop();
+    const windowHeight = $(window).height();
+    
+    // If home section is in view
+    if (scrollTop < homeBottom && scrollTop + windowHeight > homeTop) {
+        showNewsOnHome();
+    } else {
+        // Hide news card when not on home section
+        closeNewsPopup();
+    }
+});
+
+// Show news card immediately when page loads (user is on home)
+showNewsOnHome();

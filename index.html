@@ -39,6 +39,7 @@
                 <li><a href="#about" class="menu-btn">About</a></li>
                 <li><a href="#services" class="menu-btn">Experiences</a></li>
                 <li><a href="#skills" class="menu-btn">Skills</a></li>
+                <li><a href="#projects" class="menu-btn">Projects</a></li>
                 <li><a href="#teams" class="menu-btn">Certificates</a></li>
                 <li><a href="#contact" class="menu-btn">Contact</a></li>
             </ul>
@@ -62,6 +63,57 @@
                 <div class="tagline">"Madness has no evidence"</div>
                 <div class="text-3">And I'm a <span class="typing"></span></div>
             </div>
+        </div>
+        
+        <!-- Modern News Card -->
+        <div class="news-card" id="newsCard">
+            <div class="news-card-header">
+                <div class="news-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="news-title">
+                    <h4>What's New</h4>
+                    <span>Latest Updates</span>
+                </div>
+                <button class="news-close" onclick="closeNewsPopup()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="news-timeline">
+                <div class="timeline-update">
+                    <div class="update-dot active"></div>
+                    <div class="update-content">
+                        <div class="update-badge">Current</div>
+                        <h5>🔍 Cyber Forensics Specialist</h5>
+                        <p>Internship at Cyber Privilege (Aug 2025 - Nov 2025)</p>
+                    </div>
+                </div>
+                <div class="timeline-update">
+                    <div class="update-dot"></div>
+                    <div class="update-content">
+                        <div class="update-badge">2025</div>
+                        <h5>👩‍💻 Girls Script Mentor</h5>
+                        <p>Completed mentoring at Summer of Code 2025</p>
+                    </div>
+                </div>
+                <div class="timeline-update">
+                    <div class="update-dot active"></div>
+                    <div class="update-content">
+                        <div class="update-badge">Ongoing</div>
+                        <h5>🎓 Final Year Project</h5>
+                        <p>Working on project at Sandip University & learning Digital Forensics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating News Button -->
+        <div class="floating-news-btn" onclick="toggleNewsPopup()">
+            <div class="btn-icon">
+                <i class="fas fa-lightning-bolt"></i>
+            </div>
+            <div class="btn-text">Updates</div>
+            <div class="notification-dot">2</div>
         </div>
     </section>
 
@@ -193,6 +245,14 @@
                         <div class="text">Cloud Counselage Pvt. Ltd.</div>
                         <p><strong>Live Project in Cybersecurity (Internship)</strong><br>
                         Intern ID: IP4912. Completed a flexible 6-week to 3-month internship on live cybersecurity projects, gaining industry exposure and receiving a certificate upon successful completion.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <i class="fas fa-users"></i>
+                        <div class="text">Girls Script Summer of Code 2025</div>
+                        <p><strong>Mentor - Open Source Projects</strong><br>
+                        Mentored 5 projects: Pouranik (Read. Share. Connect.), NeoNest, Old School Game, DevNotes, and Retail with Purpose. Gained hands-on experience in open source development and project management.</p>
                     </div>
                 </div>
             </div>
@@ -340,6 +400,149 @@
                             <span>40%</span>
                         </div>
                         <div class="line cyberforensics"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- projects section start -->
+    <section class="projects" id="projects">
+        <div class="max-width">
+            <h2 class="title">My Projects</h2>
+            <div class="projects-content">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Personal Portfolio Website</h3>
+                        <p>My personal portfolio website showcasing projects, skills, and professional experience. Built with modern HTML, CSS, and JavaScript.</p>
+                        <div class="tech-stack">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>EmailJS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Gooichand/Gooichand.github.io" target="_blank" class="btn-github">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://gooichand.github.io/" target="_blank" class="btn-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>AgriPredict</h3>
+                        <p>An agricultural prediction application built with TypeScript that helps farmers make data-driven decisions for crop management.</p>
+                        <div class="tech-stack">
+                            <span>TypeScript</span>
+                            <span>Vercel</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Gooichand/AgriPredict" target="_blank" class="btn-github">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://agri-predict-umber.vercel.app" target="_blank" class="btn-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Simpson's Rule Calculator</h3>
+                        <p>A web-based calculator implementing Simpson's Rule for numerical integration with step-by-step calculation display.</p>
+                        <div class="tech-stack">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Gooichand/Simpson-s-Rule-Calculator" target="_blank" class="btn-github">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://gooichand.github.io/Simpson-s-Rule-Calculator/" target="_blank" class="btn-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>SECURITY-PASS-DGC</h3>
+                        <p>A security pass management system providing digital solution for managing and verifying security passes and access credentials.</p>
+                        <div class="tech-stack">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Gooichand/SECURITY-PASS-DGC" target="_blank" class="btn-github">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://gooichand.github.io/SECURITY-PASS-DGC/" target="_blank" class="btn-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>AI Learning Coach</h3>
+                        <p>An intelligent learning coach application powered by IBM's granite-3-3-8b-instruct AI model providing personalized learning assistance.</p>
+                        <div class="tech-stack">
+                            <span>TypeScript</span>
+                            <span>IBM AI</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Gooichand/AI-Learning-Coach-ibm" target="_blank" class="btn-github">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://gooichand.github.io/AI-Learning-Coach-ibm/" target="_blank" class="btn-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Speedy Study Demo</h3>
+                        <p>A demo application built with TypeScript for efficient study management and organization with progress tracking features.</p>
+                        <div class="tech-stack">
+                            <span>TypeScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Gooichand/speedy-study-demo" target="_blank" class="btn-github">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://dgc-ai.lovable.app/" target="_blank" class="btn-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
