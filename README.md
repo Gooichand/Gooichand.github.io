@@ -10,7 +10,7 @@ This is a personal portfolio website showcasing cybersecurity and digital forens
 
 This repository contains **copyrighted material** protected under intellectual property laws. 
 
-**Unauthorized use is prohibited.**
+**Unauthorised use is prohibited.**
 
 ### 🛡️ Protection Features
 
@@ -23,7 +23,6 @@ This repository contains **copyrighted material** protected under intellectual p
 ### 📋 Features
 
 - 🌟 **3D Animated Welcome Message** with weather effects
-- 📍 **GPS Location Tracking** with visitor analytics
 - 🎨 **Interactive UI** with neumorphism design
 - 📧 **Email Integration** via EmailJS
 - 📱 **Responsive Design** for all devices
