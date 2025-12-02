@@ -1,3 +1,31 @@
+/*
+    Portfolio JavaScript - Gopichand Dandimeni
+    Copyright (c) 2025 Gopichand Dandimeni. All Rights Reserved.
+    
+    This code is protected by copyright law and international treaties.
+    Unauthorized reproduction, modification, or distribution is strictly prohibited.
+    
+    For licensing inquiries: contact via GitHub @Gooichand
+*/
+
+// Copyright Protection
+(function() {
+    'use strict';
+    
+    // Obfuscated copyright check
+    const _0x1a2b = ['Gopichand', 'Dandimeni', '2025'];
+    if (!_0x1a2b.every(x => document.title.includes('DGC'))) {
+        console.warn('Unauthorized modification detected');
+    }
+    
+    // Anti-debugging
+    setInterval(() => {
+        if (window.outerHeight - window.innerHeight > 200) {
+            console.clear();
+        }
+    }, 1000);
+})();
+
 // EmailJS Configuration
 const EMAILJS_CONFIG = {
   publicKey: 'tQrf5kDN2167TgvY-',
@@ -72,28 +100,23 @@ function getTimeBasedGreeting() {
 }
 
 function getPersonalizedMessages(name, location) {
-  const motivationalMessages = [
-    `${name}, every expert was once a beginner! 🚀`,
-    `${name}, your curiosity will unlock great things! 🔓`,
-    `${name}, cybersecurity needs minds like yours! 🛡️`,
-    `${name}, the future is built by people like you! ⚡`,
-    `${name}, every line of code makes a difference! 💻`,
-    `${name}, your journey in tech starts here! 🌟`,
-    `${name}, innovation begins with exploration! 🔍`,
-    `${name}, security is everyone's responsibility! 🔐`,
-    `${name}, from ${location?.city || 'your city'} to the world! 🌍`,
-    `${name}, debugging life one problem at a time! 🐛`,
-    `${name}, your potential is limitless! ∞`,
-    `${name}, code today, change tomorrow! 🌈`,
-    `${name}, every click brings new possibilities! ✨`,
-    `${name}, welcome to the digital frontier! 🚀`,
-    `${name}, let's build something amazing together! 🏗️`
+  const welcomeMessages = [
+    `Hello ${name}! Ready to explore my digital world?`,
+    `Welcome ${name}! Great to have you here today!`,
+    `Hi ${name}! Let's discover amazing projects together!`,
+    `Greetings ${name}! Your journey starts now!`,
+    `Welcome ${name} from ${location?.city || 'your location'}!`,
+    `Hello ${name}! Thanks for visiting my portfolio!`,
+    `Hi ${name}! Excited to share my work with you!`,
+    `Welcome ${name}! Hope you enjoy your visit!`,
+    `Hello ${name}! Let's explore cybersecurity together!`,
+    `Greetings ${name}! Ready for an amazing experience?`
   ];
   
   // Use timestamp to ensure different message each visit
   const seed = Date.now() + name.length;
-  const index = seed % motivationalMessages.length;
-  return motivationalMessages[index];
+  const index = seed % welcomeMessages.length;
+  return welcomeMessages[index];
 }
 
 function getWeatherData(lat, lon) {
@@ -215,34 +238,56 @@ function showWelcomeMessage(name, location) {
   const timeGreeting = getTimeBasedGreeting();
   const personalMessage = getPersonalizedMessages(name, location);
   
+  // Update welcome content
   $('#welcomeIcon i').removeClass().addClass(timeGreeting.icon).css('color', timeGreeting.color);
   $('#welcomeTitle').text(`${timeGreeting.greeting}, ${name}!`);
   $('#welcomeMessage').text(personalMessage);
   $('#locationName').text(location?.city || 'Your Location');
   
+  // Get weather data and update display
   if(location?.latitude && location?.longitude && location?.latitude !== 'Permission denied') {
     getWeatherData(location.latitude, location.longitude).then(weather => {
       $('#temperature').text(Math.round(weather.main.temp) + '°C');
       $('#weatherDesc').text(weather.weather[0].description);
       $('#locationName').text(weather.name);
       
+      // Update weather icon based on conditions
+      const weatherIcon = getWeatherIcon(weather.weather[0].main);
+      $('.weather-icon i').removeClass().addClass(weatherIcon);
+      
       createWeatherEffect(weather.weather[0].main);
     });
   } else {
     $('#temperature').text('--°');
     $('#weatherDesc').text('Weather unavailable');
+    $('.weather-icon i').removeClass().addClass('fas fa-cloud');
   }
   
-  $('#specialWelcome').fadeIn(500);
+  // Show welcome notification
+  $('#specialWelcome').fadeIn(400);
   
+  // Auto close after 4 seconds
   setTimeout(() => {
     closeWelcomeMessage();
-  }, 6000);
+  }, 4000);
+}
+
+function getWeatherIcon(weatherType) {
+  switch(weatherType.toLowerCase()) {
+    case 'clear': return 'fas fa-sun';
+    case 'clouds': return 'fas fa-cloud';
+    case 'rain': 
+    case 'drizzle': return 'fas fa-cloud-rain';
+    case 'thunderstorm': return 'fas fa-bolt';
+    case 'snow': return 'fas fa-snowflake';
+    case 'mist':
+    case 'fog': return 'fas fa-smog';
+    default: return 'fas fa-cloud-sun';
+  }
 }
 
 function closeWelcomeMessage() {
-  $('#specialWelcome').fadeOut(500, function() {
-    $('body').css('overflow', 'auto');
+  $('#specialWelcome').fadeOut(300, function() {
     const name = sessionStorage.getItem('visitorName');
     $('.home-content .text-1').text(`Hello ${name}, My Name is`);
   });
@@ -498,10 +543,8 @@ $(document).ready(function(){
         }
     });
 
-    $('#specialWelcome').click(function(e) {
-      if (e.target === this) {
-        closeWelcomeMessage();
-      }
+    $('#specialWelcome').click(function() {
+      closeWelcomeMessage();
     });
 });
 
