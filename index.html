@@ -23,13 +23,39 @@
         <div class="splash-container">
             <div class="splash-card">
                 <h2>Welcome to My Portfolio-DGC</h2>
-                <p>Please enter your name to continue</p>
+                <p>Please enter your name for personalized experience</p>
                 <input type="text" id="visitorName" placeholder="Your name..." autofocus>
+                <div class="location-status" id="locationStatus">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Personalizing experience...</span>
+                </div>
                 <button id="enterSite">Enter</button>
-                <p class="privacy-notice">Power by DGC</p>
+                <p class="privacy-notice">We personalize your experience based on location & time. Power by DGC</p>
             </div>
         </div>
     </div>
+
+    <!-- Special Welcome Message -->
+    <div class="special-welcome" id="specialWelcome">
+        <div class="welcome-animation">
+            <div class="weather-effect" id="weatherEffect"></div>
+            <div class="welcome-content">
+                <div class="welcome-icon" id="welcomeIcon">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h2 id="welcomeTitle">Good Morning!</h2>
+                <p id="welcomeMessage">Welcome to my portfolio</p>
+                <div class="weather-display" id="weatherDisplay">
+                    <span class="temp" id="temperature">--°</span>
+                    <span class="weather-desc" id="weatherDesc">Loading weather...</span>
+                    <span class="location" id="locationName">Your Location</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weather Effects Overlay -->
+    <div class="weather-overlay" id="weatherOverlay"></div>
 
     <nav class="navbar">
         <div class="max-width">
@@ -55,6 +81,7 @@
             <source src="video/your-banner-video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+        <div class="weather-particles" id="weatherParticles"></div>
     
         <div class="max-width">
             <div class="home-content">
@@ -80,6 +107,14 @@
                 </button>
             </div>
             <div class="news-timeline">
+                <div class="timeline-update">
+                    <div class="update-dot active"></div>
+                    <div class="update-content">
+                        <div class="update-badge">New</div>
+                        <h5>❄️ Winter Consulting 2025</h5>
+                        <p>4 weeks program with Consulting & Analytics Club, IIT Guwahati</p>
+                    </div>
+                </div>
                 <div class="timeline-update">
                     <div class="update-dot active"></div>
                     <div class="update-content">
@@ -113,7 +148,7 @@
                 <i class="fas fa-lightning-bolt"></i>
             </div>
             <div class="btn-text">Updates</div>
-            <div class="notification-dot">2</div>
+            <div class="notification-dot">3</div>
         </div>
     </section>
 
