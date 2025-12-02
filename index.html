@@ -24,7 +24,11 @@
             <div class="splash-card">
                 <h2>Welcome to My Portfolio-DGC</h2>
                 <p>Please enter your name for personalized experience</p>
-                <input type="text" id="visitorName" placeholder="Your name..." autofocus>
+                <input type="text" id="visitorName" placeholder="Your name..." autofocus required>
+                <div class="name-error" id="nameError">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Please enter your name to continue</span>
+                </div>
                 <div class="location-status" id="locationStatus">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>Personalizing experience...</span>

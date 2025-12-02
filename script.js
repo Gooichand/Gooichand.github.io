@@ -271,6 +271,16 @@ $(document).ready(function() {
 
     $('#enterSite').click(function() {
       const name = $('#visitorName').val().trim();
+      
+      // Validate name input
+      if(!name || name.length < 2) {
+        showNameError();
+        return;
+      }
+      
+      // Hide error if name is valid
+      hideNameError();
+      
       if(name) {
         const emailData = {
           name: name,
@@ -306,6 +316,13 @@ $(document).ready(function() {
     $('#visitorName').keypress(function(e) {
       if(e.which == 13) {
         $('#enterSite').click();
+      }
+    });
+    
+    // Hide error when user starts typing
+    $('#visitorName').on('input', function() {
+      if($(this).val().trim().length >= 2) {
+        hideNameError();
       }
     });
   }
@@ -555,3 +572,19 @@ $(window).scroll(function() {
 });
 
 showNewsOnHome();
+
+// Name validation functions
+function showNameError() {
+  $('#nameError').show();
+  $('#visitorName').addClass('error');
+  
+  // Remove error styling after animation
+  setTimeout(() => {
+    $('#visitorName').removeClass('error');
+  }, 500);
+}
+
+function hideNameError() {
+  $('#nameError').hide();
+  $('#visitorName').removeClass('error');
+}
