@@ -1,13 +1,5 @@
 <!DOCTYPE html>
-<!--
-    Portfolio Website - Gopichand Dandimeni
-    Copyright (c) 2025 Gopichand Dandimeni. All Rights Reserved.
-    
-    This code is protected by copyright law and international treaties.
-    Unauthorized reproduction or distribution is strictly prohibited.
-    
-    For licensing inquiries: contact via GitHub @Gooichand
--->
+<!-- Portfolio Website - Gopichand Dandimeni © 2025 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,28 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
-    <!-- Copyright Protection -->
     <script>
-        // Disable right-click context menu
         document.addEventListener('contextmenu', e => e.preventDefault());
-        
-        // Disable F12, Ctrl+Shift+I, Ctrl+U
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                (e.ctrlKey && e.key === 'u')) {
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u')) {
                 e.preventDefault();
-                alert('© 2025 Gopichand Dandimeni - Code inspection disabled for copyright protection');
             }
         });
-        
-        // Disable text selection
         document.addEventListener('selectstart', e => e.preventDefault());
-        
-        // Console warning
-        console.log('%c⚠️ COPYRIGHT PROTECTED', 'color: red; font-size: 20px; font-weight: bold;');
-        console.log('%c© 2025 Gopichand Dandimeni. All Rights Reserved.', 'color: red; font-size: 14px;');
-        console.log('%cUnauthorized access or copying is prohibited by law.', 'color: red; font-size: 12px;');
     </script>
 </head>
 <body>
@@ -69,7 +47,7 @@
                     <span>Personalizing experience...</span>
                 </div>
                 <button id="enterSite">Enter</button>
-                <p class="privacy-notice">We personalize your experience based on location & time. Power by DGC</p>
+                <p class="privacy-notice">Location permission is requesting to change your experience according to your climate you're in</p>
             </div>
         </div>
     </div>

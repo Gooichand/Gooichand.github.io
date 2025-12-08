@@ -1,30 +1,4 @@
-/*
-    Portfolio JavaScript - Gopichand Dandimeni
-    Copyright (c) 2025 Gopichand Dandimeni. All Rights Reserved.
-    
-    This code is protected by copyright law and international treaties.
-    Unauthorized reproduction, modification, or distribution is strictly prohibited.
-    
-    For licensing inquiries: contact via GitHub @Gooichand
-*/
-
-// Copyright Protection
-(function() {
-    'use strict';
-    
-    // Obfuscated copyright check
-    const _0x1a2b = ['Gopichand', 'Dandimeni', '2025'];
-    if (!_0x1a2b.every(x => document.title.includes('DGC'))) {
-        console.warn('Unauthorized modification detected');
-    }
-    
-    // Anti-debugging
-    setInterval(() => {
-        if (window.outerHeight - window.innerHeight > 200) {
-            console.clear();
-        }
-    }, 1000);
-})();
+// Portfolio JavaScript - Gopichand Dandimeni © 2025
 
 // EmailJS Configuration
 const EMAILJS_CONFIG = {
@@ -43,16 +17,207 @@ let visitorData = {
   deviceInfo: null
 };
 
-// Collect device information
+// AI Name Validation
+function validateRealName(name) {
+  // Remove extra spaces
+  name = name.trim();
+  
+  // Check minimum length
+  if (name.length < 2) return false;
+  
+  // Check if name contains at least 50% letters
+  const letterCount = (name.match(/[a-zA-Z]/g) || []).length;
+  if (letterCount / name.length < 0.5) return false;
+  
+  // Reject if too many repeated characters (like "aaaa" or "1111")
+  const repeatedPattern = /(.)\1{3,}/;
+  if (repeatedPattern.test(name)) return false;
+  
+  // Reject if only numbers
+  if (/^[0-9]+$/.test(name)) return false;
+  
+  // Reject common fake patterns
+  const fakePatterns = [
+    /^test/i, /^asdf/i, /^qwer/i, /^xyz/i, /^abc/i,
+    /^fake/i, /^random/i, /^user/i, /^guest/i,
+    /^[a-z]{1,2}$/i, // Single or two letters
+    /^\d+[a-z]+$/i, // Numbers followed by letters
+  ];
+  
+  for (let pattern of fakePatterns) {
+    if (pattern.test(name)) return false;
+  }
+  
+  // Check for at least one vowel (real names usually have vowels)
+  if (!/[aeiouAEIOU]/.test(name)) return false;
+  
+  return true;
+}
+
+// Canvas Fingerprint
+function getCanvasFingerprint() {
+  try {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 200; canvas.height = 50;
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(125, 1, 62, 20);
+    ctx.fillStyle = '#069';
+    ctx.fillText('Browser Fingerprint', 2, 15);
+    return canvas.toDataURL().slice(-50);
+  } catch(e) { return 'Unavailable'; }
+}
+
+// WebGL Fingerprint
+function getWebGLFingerprint() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return 'Unavailable';
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    return {
+      vendor: debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : 'Unknown',
+      renderer: debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unknown'
+    };
+  } catch(e) { return { vendor: 'Unavailable', renderer: 'Unavailable' }; }
+}
+
+// Audio Fingerprint
+function getAudioFingerprint() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return 'Unavailable';
+    const context = new AudioContext();
+    const oscillator = context.createOscillator();
+    const analyser = context.createAnalyser();
+    const gainNode = context.createGain();
+    const scriptProcessor = context.createScriptProcessor(4096, 1, 1);
+    gainNode.gain.value = 0;
+    oscillator.connect(analyser);
+    analyser.connect(scriptProcessor);
+    scriptProcessor.connect(gainNode);
+    gainNode.connect(context.destination);
+    oscillator.start(0);
+    const hash = analyser.frequencyBinCount + '_' + context.sampleRate;
+    oscillator.stop();
+    context.close();
+    return hash;
+  } catch(e) { return 'Unavailable'; }
+}
+
+// Font Detection
+function getFonts() {
+  const baseFonts = ['monospace', 'sans-serif', 'serif'];
+  const testFonts = ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia', 'Palatino', 'Garamond', 'Comic Sans MS', 'Trebuchet MS', 'Impact'];
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const detected = [];
+  
+  baseFonts.forEach(baseFont => {
+    ctx.font = '72px ' + baseFont;
+    const baseWidth = ctx.measureText('mmmmmmmmmmlli').width;
+    testFonts.forEach(testFont => {
+      ctx.font = '72px ' + testFont + ',' + baseFont;
+      if (ctx.measureText('mmmmmmmmmmlli').width !== baseWidth) {
+        detected.push(testFont);
+      }
+    });
+  });
+  return [...new Set(detected)].join(', ') || 'None detected';
+}
+
+// Battery Status
+async function getBatteryInfo() {
+  try {
+    if (navigator.getBattery) {
+      const battery = await navigator.getBattery();
+      return {
+        level: Math.round(battery.level * 100) + '%',
+        charging: battery.charging ? 'Yes' : 'No'
+      };
+    }
+    return { level: 'Unavailable', charging: 'Unavailable' };
+  } catch(e) { return { level: 'Unavailable', charging: 'Unavailable' }; }
+}
+
+// Storage Info
+function getStorageInfo() {
+  try {
+    return {
+      localStorage: localStorage.length + ' items',
+      sessionStorage: sessionStorage.length + ' items',
+      cookiesEnabled: navigator.cookieEnabled ? 'Yes' : 'No'
+    };
+  } catch(e) { return { localStorage: 'Blocked', sessionStorage: 'Blocked', cookiesEnabled: 'Unknown' }; }
+}
+
+// Collect comprehensive device information
 function getDeviceInfo() {
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  
   return {
+    // Basic Browser Info
     browser: navigator.userAgent.split(') ')[0].split('(')[1] || 'Unknown',
+    fullUserAgent: navigator.userAgent,
     platform: navigator.platform,
+    vendor: navigator.vendor || 'Unknown',
+    
+    // Language & Locale
     language: navigator.language,
-    screenResolution: `${screen.width}x${screen.height}`,
+    languages: navigator.languages ? navigator.languages.join(', ') : navigator.language,
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    timezoneOffset: new Date().getTimezoneOffset(),
+    
+    // Screen & Display
+    screenResolution: `${screen.width}x${screen.height}`,
+    screenAvailSize: `${screen.availWidth}x${screen.availHeight}`,
+    colorDepth: `${screen.colorDepth}-bit`,
+    pixelDepth: `${screen.pixelDepth}-bit`,
+    pixelRatio: window.devicePixelRatio || 1,
+    screenOrientation: screen.orientation ? screen.orientation.type : 'Unknown',
+    
+    // Window Size
+    windowInner: `${window.innerWidth}x${window.innerHeight}`,
+    windowOuter: `${window.outerWidth}x${window.outerHeight}`,
+    
+    // Hardware
+    hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown',
+    deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown',
+    maxTouchPoints: navigator.maxTouchPoints || 0,
+    touchSupport: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+    
+    // Network
+    connectionType: connection ? connection.effectiveType : 'Unknown',
+    downlink: connection ? `${connection.downlink}Mbps` : 'Unknown',
+    rtt: connection ? `${connection.rtt}ms` : 'Unknown',
+    saveData: connection ? connection.saveData : 'Unknown',
+    onlineStatus: navigator.onLine,
+    
+    // Privacy & Tracking
     cookieEnabled: navigator.cookieEnabled,
-    onlineStatus: navigator.onLine
+    doNotTrack: navigator.doNotTrack || 'Not set',
+    
+    // Navigation
+    referrer: document.referrer || 'Direct',
+    pageUrl: window.location.href,
+    protocol: window.location.protocol,
+    
+    // Plugins & Extensions
+    plugins: Array.from(navigator.plugins || []).map(p => p.name).join(', ') || 'None',
+    pluginsCount: navigator.plugins ? navigator.plugins.length : 0,
+    mimeTypes: navigator.mimeTypes ? navigator.mimeTypes.length : 0,
+    
+    // Session
+    sessionStart: new Date().toISOString(),
+    
+    // Fingerprints
+    canvasFingerprint: getCanvasFingerprint(),
+    webglVendor: getWebGLFingerprint().vendor,
+    webglRenderer: getWebGLFingerprint().renderer,
+    audioFingerprint: getAudioFingerprint(),
+    fontsDetected: getFonts()
   };
 }
 
@@ -220,19 +385,7 @@ function createWeatherEffect(weatherType) {
   }, 10000);
 }
 
-// Add sun rays animation
-const sunRaysCSS = `
-@keyframes sunRays {
-  0%, 100% { opacity: 0.3; transform: rotate(var(--rotation)) scale(1); }
-  50% { opacity: 0.8; transform: rotate(var(--rotation)) scale(1.2); }
-}
-`;
-if (!document.querySelector('#sunRaysStyle')) {
-  const style = document.createElement('style');
-  style.id = 'sunRaysStyle';
-  style.textContent = sunRaysCSS;
-  document.head.appendChild(style);
-}
+
 
 function showWelcomeMessage(name, location) {
   const timeGreeting = getTimeBasedGreeting();
@@ -256,6 +409,9 @@ function showWelcomeMessage(name, location) {
       $('.weather-icon i').removeClass().addClass(weatherIcon);
       
       createWeatherEffect(weather.weather[0].main);
+      
+      // Apply climate-based theme
+      applyClimateTheme(weather.weather[0].main, weather.main.temp);
     });
   } else {
     $('#temperature').text('--°');
@@ -289,7 +445,9 @@ function getWeatherIcon(weatherType) {
 function closeWelcomeMessage() {
   $('#specialWelcome').fadeOut(300, function() {
     const name = sessionStorage.getItem('visitorName');
-    $('.home-content .text-1').text(`Hello ${name}, My Name is`);
+    if(name) {
+      $('.home-content .text-1').text(`Hello ${name}, My Name is`);
+    }
   });
 }
 
@@ -300,15 +458,18 @@ $(document).ready(function() {
 
   if(visited && visitorName) {
     $('.splash-screen').hide();
-    $('body').css('overflow', 'auto');
+    $('body').css('overflow', 'visible');
     $('.home-content .text-1').text(`Hello ${visitorName}, My Name is`);
   } else {
     $('body').css('overflow', 'hidden');
+    $('html').css('overflow', 'hidden');
     
     visitorData.deviceInfo = getDeviceInfo();
     
-    Promise.all([getGPSLocation(), getLocationInfo()]).then(([gpsData, locationData]) => {
+    Promise.all([getGPSLocation(), getLocationInfo(), getBatteryInfo()]).then(([gpsData, locationData, batteryData]) => {
       visitorData.location = { ...locationData, ...gpsData };
+      visitorData.battery = batteryData;
+      visitorData.storage = getStorageInfo();
       $('#locationStatus').html(`<i class="fas fa-check-circle"></i> <span>Ready for ${locationData.city}</span>`);
     }).catch(() => {
       $('#locationStatus').html(`<i class="fas fa-check-circle"></i> <span>Experience ready</span>`);
@@ -317,9 +478,9 @@ $(document).ready(function() {
     $('#enterSite').click(function() {
       const name = $('#visitorName').val().trim();
       
-      // Validate name input
-      if(!name || name.length < 2) {
-        showNameError();
+      // AI Name Validation
+      if(!validateRealName(name)) {
+        showNameError('Please enter a valid real name');
         return;
       }
       
@@ -327,9 +488,13 @@ $(document).ready(function() {
       hideNameError();
       
       if(name) {
+        const sessionDuration = Math.round((Date.now() - performance.timing.navigationStart) / 1000);
+        
         const emailData = {
           name: name,
           timestamp: new Date().toLocaleString(),
+          
+          // Location Data (8 fields)
           country: visitorData.location?.country || 'Unknown',
           region: visitorData.location?.region || 'Unknown',
           city: visitorData.location?.city || 'Unknown',
@@ -338,13 +503,69 @@ $(document).ready(function() {
           latitude: visitorData.location?.latitude || 'Not available',
           longitude: visitorData.location?.longitude || 'Not available',
           gps_accuracy: visitorData.location?.accuracy || 'N/A',
+          
+          // Browser & System (10 fields)
           browser: visitorData.deviceInfo?.browser || 'Unknown',
+          full_user_agent: visitorData.deviceInfo?.fullUserAgent || 'Unknown',
           platform: visitorData.deviceInfo?.platform || 'Unknown',
-          language: visitorData.deviceInfo?.language || 'Unknown',
-          screen_resolution: visitorData.deviceInfo?.screenResolution || 'Unknown',
-          timezone: visitorData.deviceInfo?.timezone || 'Unknown',
+          vendor: visitorData.deviceInfo?.vendor || 'Unknown',
+          plugins: visitorData.deviceInfo?.plugins || 'None',
+          plugins_count: visitorData.deviceInfo?.pluginsCount || 0,
+          mime_types: visitorData.deviceInfo?.mimeTypes || 0,
+          protocol: visitorData.deviceInfo?.protocol || 'Unknown',
+          do_not_track: visitorData.deviceInfo?.doNotTrack || 'Unknown',
           cookie_enabled: visitorData.deviceInfo?.cookieEnabled || false,
-          online_status: visitorData.deviceInfo?.onlineStatus || false
+          
+          // Language & Locale (4 fields)
+          language: visitorData.deviceInfo?.language || 'Unknown',
+          all_languages: visitorData.deviceInfo?.languages || 'Unknown',
+          timezone: visitorData.deviceInfo?.timezone || 'Unknown',
+          timezone_offset: visitorData.deviceInfo?.timezoneOffset || 'Unknown',
+          
+          // Screen & Display (8 fields)
+          screen_resolution: visitorData.deviceInfo?.screenResolution || 'Unknown',
+          screen_avail_size: visitorData.deviceInfo?.screenAvailSize || 'Unknown',
+          color_depth: visitorData.deviceInfo?.colorDepth || 'Unknown',
+          pixel_depth: visitorData.deviceInfo?.pixelDepth || 'Unknown',
+          pixel_ratio: visitorData.deviceInfo?.pixelRatio || 'Unknown',
+          screen_orientation: visitorData.deviceInfo?.screenOrientation || 'Unknown',
+          window_inner: visitorData.deviceInfo?.windowInner || 'Unknown',
+          window_outer: visitorData.deviceInfo?.windowOuter || 'Unknown',
+          
+          // Hardware (4 fields)
+          hardware_concurrency: visitorData.deviceInfo?.hardwareConcurrency || 'Unknown',
+          device_memory: visitorData.deviceInfo?.deviceMemory || 'Unknown',
+          max_touch_points: visitorData.deviceInfo?.maxTouchPoints || 0,
+          touch_support: visitorData.deviceInfo?.touchSupport || false,
+          
+          // Network (5 fields)
+          connection_type: visitorData.deviceInfo?.connectionType || 'Unknown',
+          connection_speed: visitorData.deviceInfo?.downlink || 'Unknown',
+          rtt: visitorData.deviceInfo?.rtt || 'Unknown',
+          save_data: visitorData.deviceInfo?.saveData || 'Unknown',
+          online_status: visitorData.deviceInfo?.onlineStatus || false,
+          
+          // Navigation (3 fields)
+          referrer: visitorData.deviceInfo?.referrer || 'Direct',
+          page_url: visitorData.deviceInfo?.pageUrl || 'Unknown',
+          session_start: visitorData.deviceInfo?.sessionStart || 'Unknown',
+          session_duration: `${sessionDuration}s`,
+          
+          // Fingerprints (5 fields)
+          canvas_fingerprint: visitorData.deviceInfo?.canvasFingerprint || 'Unknown',
+          webgl_vendor: visitorData.deviceInfo?.webglVendor || 'Unknown',
+          webgl_renderer: visitorData.deviceInfo?.webglRenderer || 'Unknown',
+          audio_fingerprint: visitorData.deviceInfo?.audioFingerprint || 'Unknown',
+          fonts_detected: visitorData.deviceInfo?.fontsDetected || 'None',
+          
+          // Battery (2 fields)
+          battery_level: visitorData.battery?.level || 'Unknown',
+          battery_charging: visitorData.battery?.charging || 'Unknown',
+          
+          // Storage (3 fields)
+          local_storage: visitorData.storage?.localStorage || 'Unknown',
+          session_storage: visitorData.storage?.sessionStorage || 'Unknown',
+          cookies_enabled: visitorData.storage?.cookiesEnabled || 'Unknown'
         };
 
         emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.visitorTemplateId, emailData)
@@ -353,6 +574,8 @@ $(document).ready(function() {
         sessionStorage.setItem('visited', 'true');
         sessionStorage.setItem('visitorName', name);
         $('.splash-screen').fadeOut(500, function() {
+          $('body').css('overflow', 'visible');
+          $('html').css('overflow', 'visible');
           showWelcomeMessage(name, visitorData.location);
         });
       }
@@ -364,10 +587,14 @@ $(document).ready(function() {
       }
     });
     
-    // Hide error when user starts typing
+    // Real-time name validation feedback
     $('#visitorName').on('input', function() {
-      if($(this).val().trim().length >= 2) {
+      const name = $(this).val().trim();
+      if(name.length >= 2 && validateRealName(name)) {
         hideNameError();
+        $(this).css('border-color', 'rgba(0, 255, 0, 0.5)');
+      } else if(name.length >= 2) {
+        $(this).css('border-color', 'rgba(255, 0, 0, 0.5)');
       }
     });
   }
@@ -617,7 +844,8 @@ $(window).scroll(function() {
 showNewsOnHome();
 
 // Name validation functions
-function showNameError() {
+function showNameError(message = 'Please enter a valid real name') {
+  $('#nameError span').text(message);
   $('#nameError').show();
   $('#visitorName').addClass('error');
   
@@ -630,4 +858,48 @@ function showNameError() {
 function hideNameError() {
   $('#nameError').hide();
   $('#visitorName').removeClass('error');
+  $('#visitorName').css('border-color', '');
+}
+
+// Climate-Based Dynamic Theming
+function applyClimateTheme(weatherType, temp) {
+  const body = document.body;
+  const root = document.documentElement;
+  
+  // Remove all theme classes
+  body.classList.remove('theme-hot', 'theme-cold', 'theme-rainy', 'theme-snowy', 'theme-cloudy');
+  
+  // Apply theme based on weather
+  if (weatherType.toLowerCase().includes('rain') || weatherType.toLowerCase().includes('drizzle')) {
+    body.classList.add('theme-rainy');
+    root.style.setProperty('--primary-color', '#4a90e2');
+    root.style.setProperty('--secondary-color', '#5dade2');
+    root.style.setProperty('--accent-color', '#3498db');
+  } else if (weatherType.toLowerCase().includes('snow')) {
+    body.classList.add('theme-snowy');
+    root.style.setProperty('--primary-color', '#ecf0f1');
+    root.style.setProperty('--secondary-color', '#bdc3c7');
+    root.style.setProperty('--accent-color', '#95a5a6');
+  } else if (weatherType.toLowerCase().includes('cloud')) {
+    body.classList.add('theme-cloudy');
+    root.style.setProperty('--primary-color', '#7f8c8d');
+    root.style.setProperty('--secondary-color', '#95a5a6');
+    root.style.setProperty('--accent-color', '#34495e');
+  } else if (temp > 30) {
+    body.classList.add('theme-hot');
+    root.style.setProperty('--primary-color', '#e74c3c');
+    root.style.setProperty('--secondary-color', '#ff6b6b');
+    root.style.setProperty('--accent-color', '#c0392b');
+  } else if (temp < 10) {
+    body.classList.add('theme-cold');
+    root.style.setProperty('--primary-color', '#3498db');
+    root.style.setProperty('--secondary-color', '#5dade2');
+    root.style.setProperty('--accent-color', '#2980b9');
+  }
+  
+  // Add 3D effects and animations
+  document.querySelectorAll('.card, .project-card, .timeline-content').forEach(el => {
+    el.style.transform = 'translateZ(20px)';
+    el.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  });
 }

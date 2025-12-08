@@ -1,22 +1,146 @@
-/*
-    Portfolio Stylesheet - Gopichand Dandimeni
-    Copyright (c) 2025 Gopichand Dandimeni. All Rights Reserved.
-    
-    This stylesheet is protected by copyright law.
-    Unauthorized use, modification, or distribution is prohibited.
-*/
+/* Portfolio Stylesheet - Gopichand Dandimeni © 2025 */
 
 /*  import google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 
-/* Copyright Protection */
 body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
+    transition: background-color 1s ease, color 0.5s ease;
+    overflow-x: hidden;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+/* Climate-Based Dynamic Themes */
+:root {
+    --primary-color: crimson;
+    --secondary-color: #ff6b6b;
+    --accent-color: #dc143c;
+}
+
+/* Hot Weather Theme */
+body.theme-hot {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+}
+
+body.theme-hot .navbar.sticky,
+body.theme-hot .scroll-up-btn,
+body.theme-hot .floating-news-btn,
+body.theme-hot .btn-live {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+body.theme-hot .services .serv-content .card:hover,
+body.theme-hot .teams .carousel .card:hover {
+    background: var(--primary-color) !important;
+}
+
+/* Cold Weather Theme */
+body.theme-cold {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+}
+
+body.theme-cold .navbar.sticky,
+body.theme-cold .scroll-up-btn,
+body.theme-cold .floating-news-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+body.theme-cold section .title::before {
+    background: var(--primary-color) !important;
+}
+
+body.theme-cold section .title::after {
+    color: var(--primary-color) !important;
+}
+
+/* Rainy Weather Theme */
+body.theme-rainy {
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4e9f2 100%);
+}
+
+body.theme-rainy .navbar.sticky,
+body.theme-rainy .scroll-up-btn,
+body.theme-rainy .floating-news-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+body.theme-rainy .home-content .text-3 span,
+body.theme-rainy .about .about-content .right .text span {
+    color: var(--primary-color) !important;
+}
+
+/* Snowy Weather Theme */
+body.theme-snowy {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+}
+
+body.theme-snowy .navbar.sticky,
+body.theme-snowy .scroll-up-btn,
+body.theme-snowy .floating-news-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+body.theme-snowy .timeline-dot,
+body.theme-snowy .education-image img {
+    border-color: var(--primary-color) !important;
+    background: var(--primary-color) !important;
+}
+
+/* Cloudy Weather Theme */
+body.theme-cloudy {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+body.theme-cloudy .navbar.sticky,
+body.theme-cloudy .scroll-up-btn,
+body.theme-cloudy .floating-news-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+/* 3D Effects for Climate Themes */
+body[class*="theme-"] .card,
+body[class*="theme-"] .project-card,
+body[class*="theme-"] .timeline-content,
+body[class*="theme-"] .notification-card {
+    transform: perspective(1000px) rotateY(0deg) translateZ(20px);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 0 20px rgba(var(--primary-color), 0.2);
+}
+
+body[class*="theme-"] .card:hover,
+body[class*="theme-"] .project-card:hover,
+body[class*="theme-"] .timeline-content:hover {
+    transform: perspective(1000px) rotateY(5deg) translateZ(40px) scale(1.05);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.25),
+        0 0 40px rgba(var(--primary-color), 0.4);
+}
+
+/* Animated Background Particles for Themes */
+body[class*="theme-"]::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.3;
+    animation: particleFloat 20s ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
 }
 
 *{
@@ -1652,13 +1776,14 @@ footer span a:hover{
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(0,0,0,0.95);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
   backdrop-filter: blur(8px);
+  overflow: hidden;
 }
 
 .splash-container {
@@ -1732,13 +1857,14 @@ footer span a:hover{
   justify-content: center;
   gap: 8px;
   margin: 10px 0;
-  padding: 8px 12px;
+  padding: 10px 15px;
   background: rgba(220,20,60,0.2);
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 13px;
   color: #ff6b6b;
   border: 1px solid rgba(220,20,60,0.4);
   animation: errorShake 0.5s ease-in-out;
+  text-align: center;
 }
 
 @keyframes errorShake {
