@@ -1,0 +1,45 @@
+# Gopichand Dandimeni - Portfolio
+
+## About
+Cybersecurity and Digital Forensics student at Sandip University, Nashik. Passionate about web development, data analysis, and cybersecurity research.
+
+## Current Status
+- Final year B.Tech CSE student specializing in Cybersecurity and Forensics
+- Cybersecurity Intern at CyberWarLab (Dec 2025 - Jan 2026)
+- Winter Consulting Program participant at IIT Guwahati
+
+## Skills
+- Programming: C, C++, JavaScript, Java, Python
+- Web Development: HTML, CSS, React.js, Node.js, Express.js
+- Databases: MySQL, MongoDB
+- Cybersecurity & Digital Forensics
+- Data Structures and Algorithms
+
+## Projects
+1. Personal Portfolio Website - Modern responsive portfolio with AI features
+2. AgriPredict - Agricultural prediction application
+3. Simpson's Rule Calculator - Mathematical computation tool
+4. Security Pass Management System
+5. AI Learning Coach - IBM AI-powered learning assistant
+6. Speedy Study Demo - Study management application
+
+## Experience
+- Girls Script Summer of Code 2025 Mentor
+- Campus Ambassador for multiple organizations
+- Cyber Forensics Specialist Intern at Cyber Privilege
+- Data Analysis Virtual Internship at IIT Guwahati
+
+## Contact
+- Email: Dandimenigopichand6@gmail.com
+- Phone: +91-9390606393
+- Location: Nashik, Maharashtra, India
+- GitHub: https://github.com/Gooichand
+- LinkedIn: https://www.linkedin.com/in/gopichand-dandimeni-269709287/
+
+## Website Features
+- Climate-based dynamic theming
+- AI name validation
+- Comprehensive visitor analytics
+- 3D animations and effects
+- Real-time weather integration
+- EmailJS contact system

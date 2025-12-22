@@ -802,46 +802,11 @@ document.getElementById('imageModal').onclick = function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeImageModal();
-        closeNewsPopup();
         closeWelcomeMessage();
     }
 });
 
-// Modern News Card Functions
-function toggleNewsPopup() {
-    const card = document.getElementById('newsCard');
-    card.classList.toggle('show');
-}
-
-function closeNewsPopup() {
-    const card = document.getElementById('newsCard');
-    card.classList.remove('show');
-}
-
-function showNewsOnHome() {
-    const card = document.getElementById('newsCard');
-    if (card) {
-        setTimeout(() => {
-            card.classList.add('show');
-        }, 2000);
-    }
-}
-
-$(window).scroll(function() {
-    const homeSection = $('#home');
-    const homeTop = homeSection.offset().top;
-    const homeBottom = homeTop + homeSection.outerHeight();
-    const scrollTop = $(window).scrollTop();
-    const windowHeight = $(window).height();
-    
-    if (scrollTop < homeBottom && scrollTop + windowHeight > homeTop) {
-        showNewsOnHome();
-    } else {
-        closeNewsPopup();
-    }
-});
-
-showNewsOnHome();
+// News/Updates functions removed - no longer needed
 
 // Name validation functions
 function showNameError(message = 'Please enter a valid real name') {

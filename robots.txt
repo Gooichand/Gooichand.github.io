@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /config.php
+Disallow: /send_email.php
+Disallow: /*.pdf$
+
+Sitemap: https://gooichand.github.io/sitemap.xml
