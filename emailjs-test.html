@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EmailJS Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <h1>EmailJS Test</h1>
+    <form id="testForm">
+        <input type="text" id="testName" placeholder="Name" required><br><br>
+        <input type="email" id="testEmail" placeholder="Email" required><br><br>
+        <input type="text" id="testSubject" placeholder="Subject" required><br><br>
+        <textarea id="testMessage" placeholder="Message" required></textarea><br><br>
+        <button type="submit">Send Test Email</button>
+    </form>
+
+    <script>
+        // Initialize EmailJS
+        emailjs.init('tQrf5kDN2167TgvY-');
+
+        document.getElementById('testForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('testName').value,
+                email: document.getElementById('testEmail').value,
+                subject: document.getElementById('testSubject').value,
+                message: document.getElementById('testMessage').value
+            };
+
+            console.log('Sending email with data:', formData);
+
+            try {
+                const result = await emailjs.send('service_b3wheld', 'template_9e7vhot', formData);
+                console.log('Success:', result);
+                alert('Email sent successfully!');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error: ' + JSON.stringify(error));
+            }
+        });
+    </script>
+</body>
+</html>

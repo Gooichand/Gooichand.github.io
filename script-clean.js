@@ -1,21 +1,5 @@
 // Portfolio JavaScript - Gopichand Dandimeni © 2025
 
-// EmailJS Configuration
-const EMAILJS_CONFIG = {
-  publicKey: 'tQrf5kDN2167TgvY-',
-  serviceId: 'service_b3wheld',
-  contactTemplateId: 'template_9e7vhot',
-  analyticsTemplateId: 'template_analytics' // New template for visitor analytics
-};
-
-// Initialize EmailJS with error handling
-try {
-    emailjs.init(EMAILJS_CONFIG.publicKey);
-    console.log('EmailJS initialized successfully');
-} catch (error) {
-    console.error('EmailJS initialization failed:', error);
-}
-
 // Simple name validation
 function validateRealName(name) {
   name = name.trim();
@@ -100,47 +84,12 @@ $(document).ready(function(){
         $(this).find('.sub-skills').toggleClass('show');
     });
 
-// Enhanced Contact form with analytics
-    $('#contactForm').on('submit', async function(e) {
-        e.preventDefault();
-        console.log('Form submitted');
-        
-        const formData = {
-            name: $('#name').val(),
-            email: $('#email').val(),
-            subject: $('#subject').val(),
-            message: $('#message').val()
-        };
-
-        console.log('Form data:', formData);
-
-        try {
-            // Send regular contact form
-            console.log('Sending contact form...');
-            const result = await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.contactTemplateId, formData);
-            console.log('Contact form sent:', result);
-            
-            alert('Message sent successfully!');
-            $('#contactForm')[0].reset();
-        } catch (error) {
-            console.error('Email send error:', error);
-            alert('Failed to send message: ' + error.text || error.message);
-        }
-    });
-
-    // Splash screen with analytics tracking
+    // Splash screen
     $('#enterSite').click(function() {
         const name = $('#visitorName').val();
         if (!validateRealName(name)) {
             $('#nameError').show();
             return;
-        }
-        
-        // Initialize visitor analytics
-        if (window.VisitorAnalytics) {
-            window.visitorAnalytics = new window.VisitorAnalytics();
-            // Store visitor name for analytics
-            window.visitorAnalytics.visitorName = name;
         }
         
         $('.splash-screen').fadeOut(1000);

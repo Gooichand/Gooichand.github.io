@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Analytics - Gopichand Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+        .container { max-width: 700px; margin: 20px auto; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; text-align: center; }
+        .header h1 { font-size: 22px; margin-bottom: 8px; }
+        .content { padding: 25px; }
+        .section { margin-bottom: 20px; background: #f8f9fa; border-radius: 8px; padding: 15px; }
+        .section h3 { color: #667eea; margin-bottom: 12px; font-size: 16px; }
+        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .data-item { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #eee; }
+        .label { font-weight: 600; color: #555; font-size: 13px; }
+        .value { color: #333; font-size: 13px; }
+        .priority { background: #ff6b6b; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+        .location { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; margin: 15px 0; }
+        .footer { background: #f8f9fa; padding: 15px; text-align: center; font-size: 12px; color: #666; }
+        @media (max-width: 600px) { .data-grid { grid-template-columns: 1fr; } .container { margin: 10px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Visitor Analytics Report</h1>
+            <p>Portfolio Security & Analytics Dashboard</p>
+        </div>
+        
+        <div class="content">
+            <!-- Contact Info -->
+            <div class="section">
+                <h3>📧 Contact Information</h3>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">Name:</span><span class="value">{{visitor_name}}</span></div>
+                    <div class="data-item"><span class="label">Email:</span><span class="value">{{visitor_email}}</span></div>
+                    <div class="data-item"><span class="label">Subject:</span><span class="value">{{message_subject}}</span></div>
+                </div>
+                <div style="margin-top: 10px; padding: 10px; background: #fff; border-radius: 5px;">
+                    <strong>Message:</strong> {{visitor_message}}
+                </div>
+            </div>
+
+            <!-- Location Data -->
+            <div class="location">
+                <h3>🌍 Location Analytics</h3>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">IP Address:</span><span class="value">{{ip_address}}</span></div>
+                    <div class="data-item"><span class="label">Country:</span><span class="value">{{country}}</span></div>
+                    <div class="data-item"><span class="label">Region:</span><span class="value">{{region}}</span></div>
+                    <div class="data-item"><span class="label">City:</span><span class="value">{{city}}</span></div>
+                    <div class="data-item"><span class="label">Timezone:</span><span class="value">{{timezone}}</span></div>
+                    <div class="data-item"><span class="label">ISP:</span><span class="value">{{isp}}</span></div>
+                </div>
+            </div>
+
+            <!-- Device & Browser -->
+            <div class="section">
+                <h3>💻 Device & Browser Analytics</h3>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">Browser:</span><span class="value">{{browser_name}}</span></div>
+                    <div class="data-item"><span class="label">Version:</span><span class="value">{{browser_version}}</span></div>
+                    <div class="data-item"><span class="label">OS:</span><span class="value">{{operating_system}}</span></div>
+                    <div class="data-item"><span class="label">Device:</span><span class="value">{{device_type}}</span></div>
+                    <div class="data-item"><span class="label">Screen:</span><span class="value">{{screen_resolution}}</span></div>
+                    <div class="data-item"><span class="label">Mobile:</span><span class="value">{{is_mobile}}</span></div>
+                    <div class="data-item"><span class="label">Touch:</span><span class="value">{{touch_support}}</span></div>
+                    <div class="data-item"><span class="label">Language:</span><span class="value">{{browser_language}}</span></div>
+                </div>
+            </div>
+
+            <!-- Session Data -->
+            <div class="section">
+                <h3>⏱️ Session Analytics</h3>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">Visit Time:</span><span class="value">{{visit_timestamp}}</span></div>
+                    <div class="data-item"><span class="label">Session ID:</span><span class="value">{{session_id}}</span></div>
+                    <div class="data-item"><span class="label">Time on Site:</span><span class="value">{{time_spent}}</span></div>
+                    <div class="data-item"><span class="label">Page Views:</span><span class="value">{{page_views}}</span></div>
+                    <div class="data-item"><span class="label">Referrer:</span><span class="value">{{referrer_url}}</span></div>
+                    <div class="data-item"><span class="label">Entry Page:</span><span class="value">{{entry_page}}</span></div>
+                    <div class="data-item"><span class="label">Exit Page:</span><span class="value">{{exit_page}}</span></div>
+                    <div class="data-item"><span class="label">Bounce Rate:</span><span class="value">{{bounce_rate}}</span></div>
+                </div>
+            </div>
+
+            <!-- Technical Data -->
+            <div class="section">
+                <h3>🔧 Technical Analytics</h3>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">User Agent:</span><span class="value">{{user_agent}}</span></div>
+                    <div class="data-item"><span class="label">Cookies:</span><span class="value">{{cookies_enabled}}</span></div>
+                    <div class="data-item"><span class="label">JavaScript:</span><span class="value">{{javascript_enabled}}</span></div>
+                    <div class="data-item"><span class="label">Local Storage:</span><span class="value">{{local_storage}}</span></div>
+                    <div class="data-item"><span class="label">Connection:</span><span class="value">{{connection_type}}</span></div>
+                    <div class="data-item"><span class="label">Bandwidth:</span><span class="value">{{connection_speed}}</span></div>
+                    <div class="data-item"><span class="label">Battery:</span><span class="value">{{battery_level}}</span></div>
+                    <div class="data-item"><span class="label">Memory:</span><span class="value">{{device_memory}}</span></div>
+                </div>
+            </div>
+
+            <!-- Interaction Data -->
+            <div class="section">
+                <h3>🎯 Interaction Analytics</h3>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">Clicks:</span><span class="value">{{total_clicks}}</span></div>
+                    <div class="data-item"><span class="label">Scrolls:</span><span class="value">{{scroll_depth}}</span></div>
+                    <div class="data-item"><span class="label">Form Fills:</span><span class="value">{{form_interactions}}</span></div>
+                    <div class="data-item"><span class="label">Downloads:</span><span class="value">{{downloads}}</span></div>
+                    <div class="data-item"><span class="label">Social Clicks:</span><span class="value">{{social_clicks}}</span></div>
+                    <div class="data-item"><span class="label">Project Views:</span><span class="value">{{project_views}}</span></div>
+                    <div class="data-item"><span class="label">Certificate Views:</span><span class="value">{{certificate_views}}</span></div>
+                    <div class="data-item"><span class="label">Media Views:</span><span class="value">{{media_views}}</span></div>
+                </div>
+            </div>
+
+            <!-- Security & Weather -->
+            <div class="section">
+                <h3>🛡️ Security & Environment</h3>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">Weather:</span><span class="value">{{weather_condition}}</span></div>
+                    <div class="data-item"><span class="label">Temperature:</span><span class="value">{{temperature}}</span></div>
+                    <div class="data-item"><span class="label">Theme Applied:</span><span class="value">{{dynamic_theme}}</span></div>
+                    <div class="data-item"><span class="label">VPN Detected:</span><span class="value">{{vpn_detected}}</span></div>
+                    <div class="data-item"><span class="label">Bot Score:</span><span class="value">{{bot_score}}</span></div>
+                    <div class="data-item"><span class="label">Risk Level:</span><span class="value">{{security_risk}}</span></div>
+                    <div class="data-item"><span class="label">AI Validation:</span><span class="value">{{ai_name_validation}}</span></div>
+                    <div class="data-item"><span class="label">Threat Level:</span><span class="value">{{threat_assessment}}</span></div>
+                </div>
+            </div>
+
+            <!-- Performance -->
+            <div class="section">
+                <h3>⚡ Performance Metrics</h3>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">Load Time:</span><span class="value">{{page_load_time}}</span></div>
+                    <div class="data-item"><span class="label">DOM Ready:</span><span class="value">{{dom_ready_time}}</span></div>
+                    <div class="data-item"><span class="label">First Paint:</span><span class="value">{{first_paint}}</span></div>
+                    <div class="data-item"><span class="label">Largest Paint:</span><span class="value">{{largest_paint}}</span></div>
+                    <div class="data-item"><span class="label">Network Latency:</span><span class="value">{{network_latency}}</span></div>
+                    <div class="data-item"><span class="label">Resource Count:</span><span class="value">{{resource_count}}</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>🔒 Secure Analytics Report</strong> | Generated: {{report_timestamp}}</p>
+            <p>© 2025 Gopichand Dandimeni - Cybersecurity Portfolio Analytics</p>
+        </div>
+    </div>
+</body>
+</html>
